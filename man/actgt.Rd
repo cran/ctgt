@@ -34,7 +34,7 @@ Maintainer: Ningning Xu <n.xu@lumc.nl; xu15263142750@gmail.com>
   #Generate the design matrix and response vector for logistic regression models
   n= 100
   m = 5
-  X = matrix(0, n, m,byrow = TRUE )
+  X = matrix(data = 0, nrow = n, ncol = m,byrow = TRUE )
   for ( i in 1:n){
     set.seed(1234+i)
     X[i,] =  as.vector(arima.sim(model = list(order = c(1, 0, 0), ar = 0.2), n = m) )
@@ -50,12 +50,12 @@ Maintainer: Ningning Xu <n.xu@lumc.nl; xu15263142750@gmail.com>
   hyps=xs[1]
 
   #The sinle-step ctgt procedure
-  actgt(y,X,xs,hyps)
+  actgt(y = y, X = X, xs = xs, hyps = hyps, maxit = 0, alpha = 0.05)
   #Result Iterations 
   #"unsure"        "0" 
 
   # The iterative ctgt procedure with more iterations
-  actgt(y,X,xs,hyps,maxit=10)
+  actgt(y = y, X = X, xs = xs, hyps = hyps, maxit = 0, alpha = 0.05)
   #Result Iterations 
   #"reject"       "2" 
   #which means that x1 is rejected by closed testing within two more iterations of the shortcut
@@ -63,12 +63,12 @@ Maintainer: Ningning Xu <n.xu@lumc.nl; xu15263142750@gmail.com>
 
   # For a group of feature sets
   mysets = list(xs[1:5], xs[c(1,4)], xs[c(1,4,5)])
-  sapply(mysets, function(i) actgt(y,X,xs,i))
+  sapply(mysets, function(i) actgt(y = y, X = X, xs = xs, hyps = i, maxit = 0, alpha = 0.05))
   #Result     "reject" "unsure" "reject"
   #Iterations "0"      "0"      "0"         
 
   mysets = list(xs[1:5], xs[c(1,4)], xs[c(1,4,5)])
-  sapply(mysets, function(i) actgt(y,X,xs,i,maxit=10))
+  sapply(mysets, function(i) actgt(y = y, X = X, xs = xs, hyps = i, maxit = 0, alpha = 0.05))
   #Result     "reject" "reject" "reject"
   #Iterations "0"      "2"          "0"         
 

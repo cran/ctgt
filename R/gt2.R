@@ -10,7 +10,7 @@ gt2 <- function (y, X, hyps,alpha = 0.05){
   crt = criticalvalue(lamt,alpha = alpha)
   pva = pv(test,lamt)
   res = as.numeric(c(format(pva,scientific = TRUE,digits = 3), format(test,scientific = TRUE,digits = 3), 
-                     format(crt,scientific = TRUE,digits = 3), format(length(hyps),digits = 0)) )
+                     format(crt,scientific = TRUE,digits = 3), format(length(hyps), scientific = FALSE,digits = NULL) ) )
   names(res) = c("p-value", "Statistic", "Expected", "#Cov")
   return(res)
 }

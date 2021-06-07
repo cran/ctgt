@@ -33,7 +33,7 @@ Maintainer: Ningning Xu <n.xu@lumc.nl; xu15263142750@gmail.com>
   #Generate the design matrix and response vector for logistic regression models
   n= 100
   m = 5
-  X = matrix(0, n, m,byrow = TRUE )
+  X = matrix(data = 0, nrow = n, ncol = m,byrow = TRUE )
   for ( i in 1:n){
     set.seed(1234+i)
     X[i,] =  as.vector(arima.sim(model = list(order = c(1, 0, 0), ar = 0.2), n = m) )
@@ -49,7 +49,7 @@ Maintainer: Ningning Xu <n.xu@lumc.nl; xu15263142750@gmail.com>
   hyps=xs[1]
 
   #The raw p-values of globaltest
-  gt2(y,X,hyps)
+  gt2(y = y, X = X, hyps = hyps, alpha = 0.05)
   #p-value Statistic  Expected      #Cov 
   #7.64e-03  2.30e+02  1.24e+02  1.00e+00 
 }
